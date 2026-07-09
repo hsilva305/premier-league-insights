@@ -1,8 +1,8 @@
 /* --- Global App Layout Reset --- */
 body {
-  background-color: #0b0f19;
-  color: #f8fafc;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #0b0f19 !important;
+  color: #f8fafc !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   margin: 0;
   padding: 0;
   line-height: 1.5;
@@ -47,7 +47,7 @@ body {
   transition: all 0.2s ease;
 }
 
-.nav-link.active, .nav-link:hover {
+.nav-link:hover {
   background-color: #1f2937;
   color: #38bdf8;
 }
@@ -129,7 +129,6 @@ body {
 .toggle-charts-btn:hover {
   background-color: #374151;
   border-color: #38bdf8;
-  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
 }
 
 /* --- Visualizations Charts Layout --- */
@@ -332,3 +331,22 @@ th { background-color: #1f2937; font-weight: 600; color: #f9fafb; font-size: 0.9
 .metric-focus { font-size: 1.8rem; font-weight: 700; color: #f8fafc; margin: 0; }
 .metric-small-text { font-size: 0.95rem; color: #64748b; margin: 0; }
 .detail-error-container { text-align: center; padding: 40px; color: #f43f5e; }
+
+/* --- 📱 MOBILE RESPONSIVE MEDIA QUERY --- */
+@media (max-width: 768px) {
+  .layout-wrapper { flex-direction: column; }
+  .app-sidebar { width: 100%; border-right: none; border-bottom: 1px solid #1f2937; padding: 15px 20px; gap: 15px; box-sizing: border-box; }
+  .sidebar-nav { flex-direction: row; gap: 10px; }
+  .nav-link { padding: 8px 12px; font-size: 0.9rem; }
+  .main-content-panel { padding: 20px 15px; width: 100%; box-sizing: border-box; }
+  .header-section h1 { font-size: 1.8rem; }
+  .stats-container, .charts-grid { grid-template-columns: 1fr !important; gap: 15px; }
+  .controls-container { flex-direction: column; gap: 12px; }
+  .search-bar, .filter-dropdown, .slider-card { flex: none !important; width: 100%; box-sizing: border-box; }
+  th, td { padding: 12px 10px; font-size: 0.85rem; }
+  .score-pill { padding: 4px 10px; min-width: 45px; font-size: 0.95rem; }
+  .team-name { font-size: 0.95rem; }
+  .detail-matchup-display { flex-direction: column; gap: 15px; }
+  .detail-team h2 { font-size: 1.5rem; }
+  .detail-score-box { font-size: 2.2rem; padding: 5px 20px; min-width: 80px; }
+}
