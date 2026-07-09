@@ -1,8 +1,8 @@
-# Web Development Project 5 - Premier League Match Insights
+# Web Development Project 6 - Premier League Match Insights
 
 Submitted by: **Harold Alexander Silva**
 
-This web app: **Serves as an interactive soccer analytics dashboard that pulls real-time fixture logs directly from the 2024-25 Premier League season via a public API. I designed it to track high-level season metrics and provide powerful simultaneous filtering tools—including a team text search, matchday categorical sorting, and a custom mathematical boundary goal-slider—allowing users to seamlessly isolate specific tactical distributions of match data.**
+This web app: **Serves as an interactive soccer analytics dashboard that pulls real-time fixture logs directly from the 2024-25 Premier League season via a public API. In this second iteration of the dashboard, I integrated a client-side routing system using React Router to separate concerns between global tracking views and isolated item breakdowns. The app features dual data visualizations tracking seasonal performance metrics, an overarching persistent navigation sidebar, and dynamic URL routing parameters to render dedicated deep-linked fixture analytical sub-pages.**
 
 Time spent: **12** hours spent in total
 
@@ -10,46 +10,40 @@ Time spent: **12** hours spent in total
 
 The following **required** functionality is completed:
 
-- [x] **The site has a dashboard displaying a list of data fetched using an API call**
-  - The dashboard displays at least 10 unique items, one per row
-  - The dashboard includes at least two features in each row (I display match dates, specific matchday rounds, and localized match scorelines)
-- [x] **`useEffect` React hook and `async`/`await` are used**
-- [x] **The app dashboard includes at least three summary statistics about the data** - My app dashboard includes at least three summary statistics about the data, which are:
-    - **Fixtures Loaded:** A total count of active match rows processed in the current array pool (380 matches total).
-    - **Total Goals Scored:** An aggregated numerical sum tracking every single home and away goal registered across the season.
-    - **Drawn Matches:** A dynamic calculation isolating games where the scorelines ended completely level.
-- [x] **A search bar allows the user to search for an item in the fetched data**
-  - The search bar **correctly** filters items in the list, only displaying items matching the search query
-  - The list of results dynamically updates as the user types into the search bar
-- [x] **An additional filter allows the user to restrict displayed items by specified categories**
-  - The filter restricts items in the list using a **different attribute** than the search bar (I filter categorically by individual tournament stages/Matchdays rather than character team names)
-  - The filter **correctly** filters items in the list, only displaying items matching the filter attribute in the dashboard
-  - The dashboard list dynamically updates as the user adjusts the filter
+- [x] **Clicking on an item in the list view displays more details about it**
+  - Clicking on an item in the dashboard list navigates to a detail view for that item
+  - Detail view includes extra information about the item not included in the dashboard view (Home/Away venue designations, aggregate goal outputs, and verified data ingestion endpoints)
+  - The same sidebar is displayed in detail view as in dashboard view
+  - *To ensure an accurate grade, your sidebar **must** be viewable when showing the details view in your recording.*
+- [x] **Each detail view of an item has a direct, unique URL link to that item’s detail view page**
+  -  *To ensure an accurate grade, the URL/address bar of your web browser **must** be viewable in your recording.*
+- [x] **The app includes at least two unique charts developed using the fetched data that tell an interesting story**
+  - At least two charts should be incorporated into the dashboard view of the site
+  - Each chart should describe a different aspect of the dataset (Chart 1 tracks total goals per matchday round; Chart 2 displays match result ratios to show home-field advantages)
 
 The following **optional** features are implemented:
 
-- [x] Multiple filters can be applied simultaneously (Users can query a specific team name while isolating a specific matchday and configuring exact goal parameters streaks concurrently)
-- [x] Filters use different input types
-  - I incorporated text inputs for string match arrays, select dropdown menus for seasonal stages, and range inputs for goal limits.
-- [x] The user can enter specific bounds for filter values (I built a strict dual-bounded Min and Max goal boundary interface to restrict results dynamically)
+- [x] The site’s customized dashboard contains more content that explains what is interesting about the data 
+  - e.g., an additional description, graph annotation, suggestion for which filters to use, or an additional page that explains more about the data (Created a dedicated "About Insights" view component with data-slicing tips and analytical suggestions)
+- [x] The site allows users to toggle between different data visualizations
+  - User should be able to use some mechanism to toggle between displaying and hiding visualizations (Implemented a state-driven "Hide/Show Data Charts" interactive toggle button right above the charts)
 
 The following **additional** features are implemented:
 
-* [x] **Slider Crossover Guardrails:** I added inline input logical checks directly to the React state layer ensuring that the Minimum Goal slider parameter cannot physically bypass the Maximum Goal boundary values, completely preserving data layout reliability and preventing empty list bugs.
+* [x] **Slider Crossover Guardrails:** I maintained inline structural check logic on the core React state filters to ensure that the minimum goal parameter slider can never physically step past the maximum goal limit value, preventing rendering errors.
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='./demo.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='./demo2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with **N-Studio** ## Notes
 
-During the architectural build and optimization of my dashboard, I successfully navigated three core technical hurdles:
+During this expansion phase, I navigated two prominent structural hurdles:
 
-* **Global Layout Synchronization & CSS Cleansing:** Initially, the default Vite boilerplate configuration injected global typography and line-height properties that caused my main dashboard headings and descriptions to awkwardly overlap. I solved this by overriding the layout rules in `src/App.css`, implementing strict line-height values ($1.2$ for headings, $1.4$ for prose), and purging the redundant global styles to ensure an open, clean presentation.
-* **Grid Compression & Monospace Alignment:** When data rows were mapped dynamically into the table grid, variable team name text lengths caused string crowding, forcing the fixture scores to compress against the text values (e.g., `FC1 - 0Fulham`). I resolved this UI layout bug by transforming the table columns into explicit flexbox rows (`display: flex`) with controlled gutters (`gap: 10px`), and anchoring the scoreboard values inside an isolated `.score-pill` component styled with a monospace font family and fixed bounds.
-* **Dual-Boundary State Crossover Prevention:** Integrating simultaneous range filters for **Minimum** and **Maximum** goal boundaries introduced a classic state-validation challenge: users could technically drag the minimum slider *past* the maximum value, resulting in conflicting logic that instantly returned an empty dataset. I implemented proactive inline conditional checks (`if (val <= maxGoals)` and `if (val >= minGoals)`) directly into my React input `onChange` handlers, creating a protective barrier that prevents sliders from stepping over each other.
+* **Asynchronous Chart Hydration Conflicts:** Recharts requires a stable bounding layout width to compute its vector grid coordinates accurately. Initially, when my application ran its initial load state, the charts tried to render over an empty data array before the API fetch finished, freezing the container components with blank contents. I resolved this state conflict by piping a conditional guardrail (`goalsPerMatchday.length > 0 && ...`) directly into the layout renderer, holding chart mounting actions until the data array is fully loaded.
+* **Vite Fast-Refresh Export Truncation:** While moving my code block over into a unified client-side routing hierarchy, a duplicate line snippet accidentally compiled at the very bottom of the source document, stripping Vite's capability to safely track the file's primary layout container. This triggered a blank white browser runtime screen citing a missing default export handler. Inspecting the browser console allowed me to isolate the syntax duplication, clean the trailing blocks, and re-establish hot module replacement syncing.
 
 ## License
 
