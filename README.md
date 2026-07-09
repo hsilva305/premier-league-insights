@@ -2,9 +2,9 @@
 
 Submitted by: **Harold Alexander Silva**
 
-This web app: **Serves as an interactive soccer analytics dashboard that pulls real-time fixture logs directly from the 2024-25 Premier League season via a public API. In this second iteration of the dashboard, I integrated a client-side routing system using React Router to separate concerns between global tracking views and isolated item breakdowns. The app features dual data visualizations tracking seasonal performance metrics, an overarching persistent navigation sidebar, and dynamic URL routing parameters to render dedicated deep-linked fixture analytical sub-pages.**
+This web app: **Serves as an interactive soccer analytics dashboard that pulls real-time fixture logs directly from the 2024-25 Premier League season via a public API. In this second iteration of the dashboard, I integrated a client-side routing system using React Router to separate concerns between global tracking views and isolated item breakdowns. The app features dual data visualizations tracking seasonal performance metrics, an overarching persistent navigation sidebar, mobile-responsive layouts, and dynamic URL routing parameters to render dedicated deep-linked fixture analytical sub-pages.**
 
-Time spent: **12** hours spent in total
+Time spent: **6** hours spent in total
 
 ## Required Features
 
@@ -31,6 +31,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 * [x] **Slider Crossover Guardrails:** I maintained inline structural check logic on the core React state filters to ensure that the minimum goal parameter slider can never physically step past the maximum goal limit value, preventing rendering errors.
+* [x] **Fluid Mobile Responsiveness:** Integrated comprehensive `@media` query rulesets into the global CSS layout structure, transforming grid panels, input wrappers, and sidebars into seamless vertical stacks when viewed on mobile display screens.
 
 ## Video Walkthrough
 
